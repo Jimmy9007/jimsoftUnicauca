@@ -58,6 +58,20 @@ return [
                             ],
                         ],
                     ],
+                    'lumen' => [
+                        'type' => \Laminas\Router\Http\Segment::class,
+                        'options' => [
+                            'route' => '/lumen/:action[/:id1]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id1' => '[a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => [
+                                'controller' => Controller\LumenController::class,
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],

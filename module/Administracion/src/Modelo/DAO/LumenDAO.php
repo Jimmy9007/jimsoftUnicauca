@@ -8,12 +8,12 @@ use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Update;
-use Administracion\Modelo\Entidades\Archivo;
+use Administracion\Modelo\Entidades\Lumen;
 
-class ArchivoDAO extends AbstractTableGateway
+class LumenDAO extends AbstractTableGateway
 {
 
-    protected $table = 'archivos';
+    protected $table = 'lumen';
 
     //------------------------------------------------------------------------------
 
@@ -25,13 +25,16 @@ class ArchivoDAO extends AbstractTableGateway
     //------------------------------------------------------------------------------
     public function fetchAll($filtro = '')
     {
-        $this->table = 'archivos';
+        $this->table = 'lumen';
         $select = new Select($this->table);
         $select->columns([
-            'idArchivo ',
-            'idResolucion',
+            'idLumen',
+            'idSubproceso',
+            'idEmitido',
             'nombre',
             'descripcion',
+            'tipoDocumento',
+            'publicacion',
             'archivo',
             'estado',
             'registradopor',
@@ -42,26 +45,29 @@ class ArchivoDAO extends AbstractTableGateway
         if ($filtro != '') {
             $select->where($filtro);
         } else {
-            $select->order("archivos.idArchivo DESC")->limit(25);
+            $select->order("lumen.idLumen DESC")->limit(25);
         }
         //        echo $select->getSqlString();
         return $this->selectWith($select)->toArray();
     }
-    public function getArchivoDetalle($idArchivo = 0)
+    public function getArchivoDetalle($idLumen = 0)
     {
-        $select = new Select('archivos');
+        $select = new Select('lumen');
         $select->columns(array(
-            'idArchivo ',
-            'idResolucion',
+            'idLumen',
+            'idSubproceso',
+            'idEmitido',
             'nombre',
             'descripcion',
+            'tipoDocumento',
+            'publicacion',
             'archivo',
             'estado',
             'registradopor',
             'modificadopor',
             'fechahorareg',
             'fechahoramod',
-        ))->where("archivos.idArchivo = $idArchivo")->limit(1);
+        ))->where("lumen.idLumen = $idLumen")->limit(1);
         //        echo $select->getSqlString();
         $datos = $this->selectWith($select)->toArray();
         if (count($datos) > 0) {
@@ -70,51 +76,51 @@ class ArchivoDAO extends AbstractTableGateway
             return null;
         }
     }
-    public function getArchivo($idArchivo = 0)
+    public function getArchivo($idLumen = 0)
     {
-        return new Archivo($this->select(array('idArchivo' => $idArchivo))->current()->getArrayCopy());
+        return new Lumen($this->select(array('idLumen' => $idLumen))->current()->getArrayCopy());
     }
     //------------------------------------------------------------------------------
 
-    public function registrar(Archivo $archivoOBJ = null)
+    public function registrar(Lumen $lumenOBJ = null)
     {
         try {
-            $this->table = 'archivos';
+            $this->table = 'lumen';
             $insert = new Insert($this->table);
-            $datos = $archivoOBJ->getArrayCopy();
-            unset($datos['idArchivo']);
+            $datos = $lumenOBJ->getArrayCopy();
+            unset($datos['idLumen']);
             $insert->values($datos);
             $this->insertWith($insert);
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
     }
-    public function editar(Archivo $archivoOBJ = null)
+    public function editar(Lumen $lumenOBJ = null)
     {
         try {
-            $this->table = 'archivos';
-            $idArchivo = (int) $archivoOBJ->getIdArchivo();
+            $this->table = 'lumen';
+            $idLumen = (int) $lumenOBJ->getIdLumen();
             $update = new Update($this->table);
-            $datos = $archivoOBJ->getArrayCopy();
+            $datos = $lumenOBJ->getArrayCopy();
             $update->set($datos);
-            $update->where("archivos.idArchivo =  $idArchivo");
+            $update->where("lumen.idLumen =  $idLumen");
             //echo $update->getSqlString();
             return $this->updateWith($update);
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
     }
-    public function eliminar(Archivo $archivoOBJ = null)
+    public function eliminar(Lumen $lumenOBJ = null)
     {
         try {
-            $this->table = "archivos";
+            $this->table = "lumen";
             $update = new Update($this->table);
             $update->set([
                 'estado' => 'Eliminado',
-                'modificadopor' => $archivoOBJ->getModificadopor(),
-                'fechahoramod' => $archivoOBJ->getFechahoramod(),
+                'modificadopor' => $lumenOBJ->getModificadopor(),
+                'fechahoramod' => $lumenOBJ->getFechahoramod(),
             ]);
-            $update->where("archivos.idArchivo = " . $archivoOBJ->getIdArchivo());
+            $update->where("lumen.idLumen = " . $lumenOBJ->getIdLumen());
             //echo $update->getSqlString();
             $this->updateWith($update);
         } catch (\Exception $e) {
@@ -122,5 +128,33 @@ class ArchivoDAO extends AbstractTableGateway
         }
     }
 
+    //------------------------------------------------------------------------------
+    public function getProcesos()
+    {
+        $this->table = 'proceso';
+        $select = new Select($this->table);
+        //        echo $select->getSqlString();
+        return $this->selectWith($select)->toArray();
+    }
+    public function getTipoProceso($idProceso = 0)
+    {
+        $select = new Select('tipo_proceso');
+        $select->columns(array(
+            'idTipoProceso',
+            'idProceso',
+            'tipoProceso'
+        ))->where("tipo_proceso.idProceso = $idProceso");
+        return $this->selectWith($select)->toArray();
+    }
+    public function getSubproceso($idTipoProceso = 0)
+    {
+        $select = new Select('subproceso');
+        $select->columns(array(
+            'idSubproceso',
+            'idTipoProceso',
+            'subproceso'
+        ))->where("subproceso.idTipoProceso = $idTipoProceso");
+        return $this->selectWith($select)->toArray();
+    }
     //------------------------------------------------------------------------------
 }

@@ -38,11 +38,6 @@ function verEliminar(idEmpleado) {
 }
 function setFormulario(datos) {
     $("#divContenido").html(datos);
-    /*  ClassicEditor
-         .create(document.querySelector('#descripcion'))
-         .catch(error => {
-             console.error(error);
-         }); */
     $('#modalFormulario').modal('show');
 }
 
@@ -64,5 +59,30 @@ function validarGuardar(evt, formulario, tipo) {
         }
     });
 }
-//------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------
+function getTipoProceso(idProceso) {
+    if (idProceso !== '') {
+        $.get('getSelectTipoProcesos', { idProceso: idProceso }, setTipoProceso);
+        bloqueoAjax();
+    } else {
+        $("#idTipoProceso").html("<option value=''>Seleccione...</option>");
+        $("#idSubproceso").html("<option value=''>Seleccione...</option>");
+    }
+}
+function setTipoProceso(html) {
+    $("#idTipoProceso").html(html);
+}
+function getSubProceso(idTipoProceso) {
+    if (idTipoProceso !== '') {
+        $.get('getSelectSubprocesos', { idTipoProceso: idTipoProceso }, setSubproceso);
+        bloqueoAjax();
+    } else {
+        $("#idSubproceso").html("<option value=''>Seleccione...</option>");
+    }
+}
+function setSubproceso(html) {
+    $("#idSubproceso").html(html);
+}
+
+//------------------------------------------------------------------------------

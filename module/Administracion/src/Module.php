@@ -29,6 +29,10 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get('jimsoft_bd');
                     return new Modelo\DAO\ArchivoDAO($dbAdapter);
                 },
+                Modelo\DAO\LumenDAO::class => function ($container) {
+                    $dbAdapter = $container->get('jimsoft_bd');
+                    return new Modelo\DAO\LumenDAO($dbAdapter);
+                },
             ],
         ];
     }
@@ -45,6 +49,9 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\ArchivoController::class => function ($container) {
                     return new Controller\ArchivoController($container->get(Modelo\DAO\ArchivoDAO::class));
+                },
+                Controller\LumenController::class => function ($container) {
+                    return new Controller\LumenController($container->get(Modelo\DAO\LumenDAO::class));
                 },
             ],
         ];

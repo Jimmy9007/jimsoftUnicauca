@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3603
--- Tiempo de generación: 05-10-2023 a las 14:34:27
+-- Tiempo de generación: 09-10-2023 a las 23:25:56
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.0.23
 
@@ -188,6 +188,39 @@ INSERT INTO `eventos` (`idEvento`, `tipo`, `title`, `descripcion`, `start`, `end
 (15, 'Intersemestrales', 'Cursos intersemestrales', 'Cursos intersemestrales', '2023-07-01 00:00:00', '2023-07-31 00:00:00', '#5a00ba', '#ffffff', 'true', 'Activo', 'jnunez', 'jnunez', '2023-10-03 16:31:01', '2023-10-03 16:31:43'),
 (16, 'Tramites academicos', 'Vencimiento de los términos para acreditar situación prevista en el parágrafo quinto del artículo 4 del Acuerdo 085 de 2008 (Adicionando Acuerdo 044/2012) - 90 días Sustentación Trabajo de Grado.', 'Vencimiento de los términos para acreditar situación prevista en el parágrafo quinto del artículo 4 del Acuerdo 085 de 2008 (Adicionando Acuerdo 044/2012) - 90 días Sustentación Trabajo de Grado.', '2023-05-13 00:00:00', '2023-05-13 00:00:00', '#00aae5', '#ffffff', 'true', 'Activo', 'jnunez', '', '2023-10-03 16:51:21', '0000-00-00 00:00:00'),
 (17, 'Fin periodo academico', 'Cursos intersemestrales', 'Cursos intersemestrales', '2023-06-23 00:00:00', '2023-06-23 00:00:00', '#db141c', '#ffffff', 'true', 'Activo', 'jnunez', '', '2023-10-03 16:58:33', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lumen`
+--
+
+CREATE TABLE `lumen` (
+  `idLumen` int(11) UNSIGNED NOT NULL,
+  `idSubproceso` int(11) UNSIGNED NOT NULL,
+  `idEmitido` int(10) UNSIGNED NOT NULL,
+  `nombre` text COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
+  `tipoDocumento` enum('Formato','Proceso','Manual','Instructivo','Plan','Nomograma','Protocolo','Procedimiento','Otro') COLLATE utf8_unicode_ci NOT NULL,
+  `publicacion` date NOT NULL,
+  `archivo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `estado` enum('Activo','Eliminado') COLLATE utf8_unicode_ci NOT NULL,
+  `registradopor` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `modificadopor` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `fechahorareg` datetime NOT NULL DEFAULT current_timestamp(),
+  `fechahoramod` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `lumen`
+--
+
+INSERT INTO `lumen` (`idLumen`, `idSubproceso`, `idEmitido`, `nombre`, `descripcion`, `tipoDocumento`, `publicacion`, `archivo`, `estado`, `registradopor`, `modificadopor`, `fechahorareg`, `fechahoramod`) VALUES
+(1, 1, 1, 'Proceso Estratégico\r\nOficina de relaciones interinstitucionales e internacionales\r\nSuscripción de convenios de cooperación académica', 'Proceso Estratégico\r\nOficina de relaciones interinstitucionales e internacionales\r\nSuscripción de convenios de cooperación académica', 'Procedimiento', '2015-09-04', 'LUMEN_651b1cc7445271_89379059.pdf', 'Activo', 'jnunez', '', '2023-10-06 09:57:12', '0000-00-00 00:00:00'),
+(2, 19, 1, 'Gestión Administrativa\r\nApoyo Administrativo\r\nElaboración de Cuentas por Cobrar Servicios Prestados', 'Gestión Administrativa\r\nApoyo Administrativo\r\nElaboración de Cuentas por Cobrar Servicios Prestados', 'Procedimiento', '2017-04-20', 'LUMEN_651b18d7655212_70849650.pdf', 'Activo', 'jnunez', '', '2023-10-07 17:42:10', '0000-00-00 00:00:00'),
+(3, 8, 1, 'Proceso Misional\r\nCentro de Regionalización\r\nGestión de la Oferta Académica', 'Proceso Misional\r\nCentro de Regionalización\r\nGestión de la Oferta Académica', 'Procedimiento', '2015-09-04', 'LUMEN_651b140e6394f4_59205690.pdf', 'Activo', 'jnunez', '', '2023-10-09 14:13:53', '0000-00-00 00:00:00'),
+(4, 31, 1, 'Proceso de Evaluación\r\nGestión del Control y del Mejoramiento Continuo\r\nEvaluación de la Gestión del Riesgo\r\n', 'Proceso de Evaluación\r\nGestión del Control y del Mejoramiento Continuo\r\nEvaluación de la Gestión del Riesgo\r\n', 'Procedimiento', '2019-11-13', 'LUMEN_651b34841e5806_22347058.pdf', 'Activo', 'jnunez', '', '2023-10-09 14:18:31', '0000-00-00 00:00:00'),
+(5, 2, 1, 'Proceso Estratégico\r\nSecretaría General\r\nActividades de Secretariado de las Corporaciones Universitarias: Consejo\r\nSuperior, Consejo Académico', 'Proceso Estratégico\r\nSecretaría General\r\nActividades de Secretariado de las Corporaciones Universitarias: Consejo\r\nSuperior, Consejo Académico', 'Procedimiento', '2016-11-29', 'LUMEN_6524d0962e21c4_30873491.pdf', 'Activo', 'jnunez', '', '2023-10-09 23:18:30', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1311,6 +1344,27 @@ INSERT INTO `municipios` (`idMunicipio`, `municipio`, `estado`, `idDepartamento`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `proceso`
+--
+
+CREATE TABLE `proceso` (
+  `idProceso` int(10) UNSIGNED NOT NULL,
+  `proceso` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `proceso`
+--
+
+INSERT INTO `proceso` (`idProceso`, `proceso`) VALUES
+(1, 'Estratégicos '),
+(2, 'Misionales'),
+(3, 'Apoyo'),
+(4, 'Evaluación');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `solicitud`
 --
 
@@ -1337,6 +1391,81 @@ INSERT INTO `solicitud` (`idSolicitud`, `idMunicipio`, `tipoIdentificacion`, `id
 (1, 679, 'Cedula', '1061730370', 'Jimmy Andrés', 'Núñez Astduillo', 'Masculino', '3206048323', 'jimmy-9010@hotmail.com', 'Car 20A # 2-14 B/Pandiguando', 'Hola mundo compañeros de la Universidad del Cauca.', '2023-09-25 11:47:40'),
 (2, 679, 'Cedula', '34550334', 'Rubiela', 'Astudillo Espinosa', 'Femenino', '3206053503', 'rubiela600718@gmail.com', 'Car  20A #2-14 B/Pandiguando', 'Hola mundo desde el Hospital Universitario de Cali.', '2023-09-25 13:26:40'),
 (3, 679, 'Cedula', '25279114', 'Beatriz Eugenia', 'Cucuñame Valencia', 'Femenino', '3166168147', 'beatrizeu2006@gmail.com', 'Manzana 13 Casa 10 Apartamento 101', 'Hola mundo desde el Barrio Tomas Cipriano de Mosquera.', '2023-09-27 17:37:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subproceso`
+--
+
+CREATE TABLE `subproceso` (
+  `idSubproceso` int(11) UNSIGNED NOT NULL,
+  `idTipoProceso` int(11) UNSIGNED NOT NULL,
+  `subproceso` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `subproceso`
+--
+
+INSERT INTO `subproceso` (`idSubproceso`, `idTipoProceso`, `subproceso`) VALUES
+(1, 1, 'Relaciones Interinstitucionales e Internacionales'),
+(2, 1, 'Gestión de las Comunicaciones'),
+(3, 1, 'Secretaría General'),
+(4, 2, 'Gestión de la Planeación y Desarrollo Institucional'),
+(5, 3, 'Gestión de la Certificación'),
+(6, 3, 'Gestión de la Acreditación'),
+(7, 3, 'Gestión Ambiental'),
+(8, 4, 'Gestión Curricular'),
+(9, 4, 'Gestión de Facultades y programas Académicos'),
+(10, 4, 'Servicios de laboratorio de apoyo a la docencia'),
+(11, 5, 'Gestión de la Investigación'),
+(12, 5, 'Gestión editorial'),
+(13, 5, 'Gestión de transferencia del conocimiento'),
+(14, 6, 'Gestión del bienestar universitario'),
+(15, 6, 'Gestión de la cultura'),
+(16, 6, 'Gestión de la formación humana'),
+(17, 6, 'Gestión administrativa unisalud'),
+(18, 6, 'Gestión asistencial unisalud'),
+(19, 7, 'Apoyo Administrativo'),
+(20, 7, 'Gestión del Talento Humano'),
+(21, 7, 'Gestión financiera'),
+(22, 7, 'Gestión del Mantenimiento de Bienes Muebles, Inmuebles y Equipos'),
+(23, 7, 'Gestión Jurídica'),
+(24, 7, 'Gestión de bienes y servicios'),
+(25, 7, 'Gestión de recursos tecnológicos'),
+(26, 7, 'Gestión admisiones, registro y control académico'),
+(27, 7, 'Gestión documental'),
+(28, 7, 'Gestión recursos bibliográficos'),
+(29, 7, 'Gestión de la seguridad y movilidad'),
+(30, 7, 'Gestión de Seguridad y Salud en el Trabajo'),
+(31, 8, 'Gestión del Control y del Mejoramiento Continuo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_proceso`
+--
+
+CREATE TABLE `tipo_proceso` (
+  `idTipoProceso` int(10) UNSIGNED NOT NULL,
+  `idProceso` int(10) UNSIGNED NOT NULL,
+  `tipoProceso` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_proceso`
+--
+
+INSERT INTO `tipo_proceso` (`idTipoProceso`, `idProceso`, `tipoProceso`) VALUES
+(1, 1, 'Gestión de la Dirección Universitaria'),
+(2, 1, 'Gestión de la Planeación y Desarrollo Institucional'),
+(3, 1, 'Gestión de la Calidad'),
+(4, 2, 'Gestión Académica'),
+(5, 2, 'Gestión de la Investigación, Innovación e Interacción Social'),
+(6, 3, 'Gestión de la cultura y bienestar'),
+(7, 3, 'Gestión Administrativa Financiera'),
+(8, 4, 'Gestión de control y mejoramiento continuo');
 
 -- --------------------------------------------------------
 
@@ -1400,6 +1529,13 @@ ALTER TABLE `eventos`
   ADD PRIMARY KEY (`idEvento`);
 
 --
+-- Indices de la tabla `lumen`
+--
+ALTER TABLE `lumen`
+  ADD PRIMARY KEY (`idLumen`),
+  ADD KEY `idSubproceso` (`idSubproceso`);
+
+--
 -- Indices de la tabla `municipios`
 --
 ALTER TABLE `municipios`
@@ -1407,10 +1543,30 @@ ALTER TABLE `municipios`
   ADD KEY `departamento_id` (`idDepartamento`);
 
 --
+-- Indices de la tabla `proceso`
+--
+ALTER TABLE `proceso`
+  ADD PRIMARY KEY (`idProceso`);
+
+--
 -- Indices de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
   ADD PRIMARY KEY (`idSolicitud`);
+
+--
+-- Indices de la tabla `subproceso`
+--
+ALTER TABLE `subproceso`
+  ADD PRIMARY KEY (`idSubproceso`),
+  ADD KEY `idTipoProceso` (`idTipoProceso`);
+
+--
+-- Indices de la tabla `tipo_proceso`
+--
+ALTER TABLE `tipo_proceso`
+  ADD PRIMARY KEY (`idTipoProceso`),
+  ADD KEY `idProceso` (`idProceso`);
 
 --
 -- Indices de la tabla `usuario`
@@ -1449,10 +1605,22 @@ ALTER TABLE `eventos`
   MODIFY `idEvento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT de la tabla `lumen`
+--
+ALTER TABLE `lumen`
+  MODIFY `idLumen` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `municipios`
 --
 ALTER TABLE `municipios`
   MODIFY `idMunicipio` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1101;
+
+--
+-- AUTO_INCREMENT de la tabla `proceso`
+--
+ALTER TABLE `proceso`
+  MODIFY `idProceso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitud`
@@ -1461,10 +1629,44 @@ ALTER TABLE `solicitud`
   MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `subproceso`
+--
+ALTER TABLE `subproceso`
+  MODIFY `idSubproceso` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_proceso`
+--
+ALTER TABLE `tipo_proceso`
+  MODIFY `idTipoProceso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `lumen`
+--
+ALTER TABLE `lumen`
+  ADD CONSTRAINT `lumen_ibfk_1` FOREIGN KEY (`idSubproceso`) REFERENCES `subproceso` (`idSubproceso`);
+
+--
+-- Filtros para la tabla `subproceso`
+--
+ALTER TABLE `subproceso`
+  ADD CONSTRAINT `subproceso_ibfk_1` FOREIGN KEY (`idTipoProceso`) REFERENCES `tipo_proceso` (`idTipoProceso`);
+
+--
+-- Filtros para la tabla `tipo_proceso`
+--
+ALTER TABLE `tipo_proceso`
+  ADD CONSTRAINT `tipo_proceso_ibfk_1` FOREIGN KEY (`idProceso`) REFERENCES `proceso` (`idProceso`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,26 +16,26 @@ $flash->clearCurrentMessages('error');
 $mostrarMensajes = '';
 foreach (array_filter($notificaciones) as $tipo => $mensajes) {
     $tipoToastr = 'info';
-    $titulo = 'JimSoft';
+    $titulo = 'GestorPortal';
     switch ($tipo) {
         case 'success':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'success';
             break;
         case 'error':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'error';
             break;
         case 'alert':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'warning';
             break;
         case 'information':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'info';
             break;
         case 'warning':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'warning';
             break;
     }

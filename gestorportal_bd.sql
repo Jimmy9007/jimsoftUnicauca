@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3603
--- Tiempo de generación: 09-10-2023 a las 23:25:56
+-- Tiempo de generación: 11-10-2023 a las 11:24:00
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.0.23
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `jimsoft_bd`
+-- Base de datos: `gestorportal_bd`
 --
 
 -- --------------------------------------------------------

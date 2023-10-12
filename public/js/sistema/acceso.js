@@ -91,7 +91,7 @@ function setLogin(datos) {
 function verificarPassword() {
     if ($("#password").val() !== '') {
         if ($("#password").val().length < 6) {
-            Swal.fire('EL PASSWORD DEBE TENER AL MENOS 6 CARACTERES', 'JimSoft', 'error');
+            Swal.fire('EL PASSWORD DEBE TENER AL MENOS 6 CARACTERES', 'GestorPortal', 'error');
             $("#password").attr('type', 'password');
             $("#passwordseguro").attr('type', 'password');
             $("#password").val('');
@@ -101,7 +101,7 @@ function verificarPassword() {
     }
     if ($("#password").val() !== '' && $("#passwordseguro").val() !== '') {
         if ($("#password").val() !== $("#passwordseguro").val()) {
-            Swal.fire('EL PASSWORD Y SU CONFIRMACION NO COINCIDEN', 'JimSoft', 'error');
+            Swal.fire('EL PASSWORD Y SU CONFIRMACION NO COINCIDEN', 'GestorPortal', 'error');
             $("#password").attr('type', 'password');
             $("#passwordseguro").attr('type', 'password');
             $("#password").val('');

@@ -98,7 +98,7 @@ class EventoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR EVENTO - EventoController->registrar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL EVENTO NO FUE REGISTRADO EN JIMSOFT.');
@@ -126,7 +126,7 @@ class EventoController extends AbstractActionController
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " EDITAR EVENTO - EventoController->registrar \n"
                         . $ex->getMessage()
                         . "\n----------------------------------------------------------------------- \n";
-                    $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+                    $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
                     $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL EVENTO NO FUE EDITADO EN JIMSOFT.');
@@ -167,7 +167,7 @@ class EventoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " MOVER EVENTO - EventoController->moverevento \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN JIMSOFT.');
@@ -193,7 +193,7 @@ class EventoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " MOVER EVENTO - EventoController->moverevento \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN JIMSOFT.');

@@ -18,7 +18,7 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Modelo\DAO\InicioDAO::class => function ($container) {
-                    $dbAdapter = $container->get('jimsoft_bd');
+                    $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\InicioDAO($dbAdapter);
                 },
             ],

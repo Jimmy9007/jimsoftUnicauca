@@ -18,17 +18,17 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Modelo\DAO\EmpleadoclienteDAO::class => function ($container) {
-                    $dbAdapter = $container->get('jimsoft_bd');
+                    $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\EmpleadoclienteDAO($dbAdapter);
                 },
                 //--------------------------------------------------------------
                 Modelo\DAO\AccesoDAO::class => function ($container) {
-                    $dbAdapter = $container->get('jimsoft_bd');
+                    $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\AccesoDAO($dbAdapter);
                 },
                 //--------------------------------------------------------------
                 Modelo\DAO\PerfilDAO::class => function ($container) {
-                    $dbAdapter = $container->get('jimsoft_bd');
+                    $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\PerfilDAO($dbAdapter);
                 },
             ],

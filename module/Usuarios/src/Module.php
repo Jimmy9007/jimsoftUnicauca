@@ -143,7 +143,7 @@ class Module implements ConfigProviderInterface {
                     return new Modelo\DAO\UsuarioDAO($tableGateway);
                 },
                 Modelo\DAO\UsuarioDAOGateway::class => function ($container) {
-                    $dbAdapter = $container->get('jimsoft_bd');
+                    $dbAdapter = $container->get('gestorportal_bd');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Modelo\Entidades\Usuario());
                     return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
@@ -156,7 +156,7 @@ class Module implements ConfigProviderInterface {
         return [
             'factories' => [
                 Controller\LoginController::class => function ($container) {
-                    return new Controller\LoginController($container->get('jimsoft_bd'), $container->get(Modelo\DAO\UsuarioDAO::class));
+                    return new Controller\LoginController($container->get('gestorportal_bd'), $container->get(Modelo\DAO\UsuarioDAO::class));
                 },
             ],
         ];

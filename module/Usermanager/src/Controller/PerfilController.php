@@ -123,7 +123,7 @@ class PerfilController extends AbstractActionController
                 $msgLog = "\n" . date('Y-m-d H:i:s') . " cambiarfotoAction - PerfilController->registrar \n"
                     . $ex->getMessage()
                     . "\n----------------------------------------------------------------------- \n";
-                $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+                $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                 fwrite($file, $msgLog);
                 fclose($file);
                 $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! LA FOTO NO  FUE CAMBIADO EN JIMSOFT.');
@@ -163,7 +163,7 @@ class PerfilController extends AbstractActionController
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " EDITAR EMPLEADO - EmpleadoclienteController->registrar \n"
                         . $ex->getMessage()
                         . "\n----------------------------------------------------------------------- \n";
-                    $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+                    $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
                     $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL EMPLEADO NO FUE EDITADO EN JIMSOFT.');
@@ -200,7 +200,7 @@ class PerfilController extends AbstractActionController
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " Cambiar Password - PerfilController->cambiarpasswordAction \n"
                         . $ex->getMessage()
                         . "\n----------------------------------------------------------------------- \n";
-                    $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+                    $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
                     $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE EN JIMSOFT.');

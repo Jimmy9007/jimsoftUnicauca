@@ -16,26 +16,26 @@ $flash->clearCurrentMessages('error');
 $mostrarMensajes = '';
 foreach (array_filter($notificaciones) as $tipo => $mensajes) {
     $tipoToastr = 'info';
-    $titulo = 'JimSoft';
+    $titulo = 'GestorPortal';
     switch ($tipo) {
         case 'success':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'success';
             break;
         case 'error':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'error';
             break;
         case 'alert':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'warning';
             break;
         case 'information':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'info';
             break;
         case 'warning':
-            $titulo = '<p><b><i><i class="fa fa-paw"></i> JimSoft</i></b></p>';
+            $titulo = '<p><b><i><i class="fa fa-paw"></i> GestorPortal</i></b></p>';
             $tipoToastr = 'warning';
             break;
     }
@@ -107,7 +107,7 @@ $this->headScript()->prependScript('
 <div class="col-md-12 col-sm-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2><span data-feather="users"></span> Control de Accesos<small><i><b><i class="fa fa-paw"></i>JimSoft</small></b></i></h2>
+            <h2><span data-feather="users"></span> Control de Accesos<small><i><b><i class="fa fa-paw"></i>GestorPortal</small></b></i></h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>

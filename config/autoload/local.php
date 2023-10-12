@@ -30,7 +30,7 @@ return [
         // to allow other adapter to be called by
         // $sm->get('db1') or $sm->get('db2') based on the adapters config.
         'adapters' => [
-            'jimsoft_bd' => [
+            'gestorportal_bd' => [
                 'username' => 'root',
                 'password' => '',
             ],

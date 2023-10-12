@@ -10,7 +10,7 @@ echo $this->form()->openTag($form);
 
     <div class="login_wrapper">
         <div class="animate form login_form">
-            <div class="x_panel" style="background-color: rgba(0, 0, 0, 0.75); border-radius: 32px; border: dotted 3px #702cf6;">
+            <div class="x_panel" style="background-color: rgba(0, 0, 0, 0.75); border-radius: 32px; border: dotted 3px #000066;">
                 <section class="login_content">
                     <form>
                         <h2 style="color: #FFFFFF;"><b><i>Iniciar Sesión</i></b> <i class="fa fa-sign-in"></i></h2>
@@ -25,23 +25,24 @@ echo $this->form()->openTag($form);
                             </span>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="background-color: #702cf6; border-color: #702cf6;">Iniciar sesión <i class="fa fa-sign-in"></i></button>
-                            <a href="#" style="color:greenyellow;">&iquest;Perdiste tu contraseña&quest;</a>
+                            <button type="submit" class="btn btn-success" style="background-color: #000066; border-color: #000066;">Iniciar sesión <i class="fa fa-sign-in"></i></button>
+                            <a href="#" style="color:#9D0311; text-decoration:none;">&iquest;Perdiste tu contraseña&quest;</a>
                         </div>
 
                         <div class="clearfix"></div>
 
                         <div class="separator">
                             <p class="change_link" style="color: #FFFFFF;">&iquest;Nuevo en el sitio&quest;
-                                <a href="#signup" style="color:greenyellow;"> Crear una cuenta </a>
+                                <a href="#signup" style="color:#9D0311; text-decoration:none;"> Crear una cuenta </a>
                             </p>
 
                             <div class="clearfix"></div>
                             <br />
 
                             <div>
-                                <h2 class="animated bounce hvr-buzz estilologo"><b><i><i class="fa fa-paw"></i>JimSoft</i></b></h2>
-                                <p style="color: #FFFFFF;"><b><i><i class="fa fa-paw"></i>JimSoft</i></b> <small>Software e Ingeniería</small> &copy; Copyright 2023</p>
+                                <a href="https://www.unicauca.edu.co" target="_blank"><img class="animated bounce hvr-buzz estilologo" src="<?= $this->basePath('img/logo.png') ?>" /></a>
+                                <p style="color: #FFFFFF;"><b>Universidad del Cauca</b></p>
+                                <p><small>División TIC &copy; Copyright 2023</small></p>
                             </div>
                         </div>
                     </form>
@@ -50,7 +51,7 @@ echo $this->form()->openTag($form);
         </div>
 
         <div id="register" class="animate form registration_form">
-            <div class="x_panel" style="background-color: rgba(0, 0, 0, 0.75); border-radius: 32px; border: dotted 3px #702cf6;">
+            <div class="x_panel" style="background-color: rgba(0, 0, 0, 0.75); border-radius: 32px; border: dotted 3px #000066;">
                 <section class="login_content">
                     <form>
                         <h2 style="color:#FFFFFF"><b><i>Registrarse</i></b></h1>
@@ -64,22 +65,23 @@ echo $this->form()->openTag($form);
                                 <input type="password" class="form-control" placeholder="Contraseña" required="" />
                             </div>
                             <div>
-                                <a type="bootom" href="index.html" class="btn btn-success" style="background-color: #702cf6; border-color: #702cf6;">Registrarse</a>
+                                <a type="bootom" href="index.html" class="btn btn-success" style="background-color: #000066; border-color: #000066;">Registrarse</a>
                             </div>
 
                             <div class="clearfix"></div>
 
                             <div class="separator">
                                 <p class="change_link" style="color:#FFFFFF">&iquest;Ya eres usuario&quest;
-                                    <a href="#signin" style="color:greenyellow;"> Acceso </a>
+                                    <a href="#signin" style="color:#9D0311;"> Acceso </a>
                                 </p>
 
                                 <div class="clearfix"></div>
                                 <br />
 
                                 <div>
-                                    <h2 class="animated bounce hvr-buzz estilologo"><b><i><i class="fa fa-paw"></i>JimSoft</i></b></h2>
-                                    <p style="color: #FFFFFF;"><b><i><i class="fa fa-paw"></i>JimSoft</i></b> <small>Software e Ingeniería</small> &copy; Copyright 2023</p>
+                                    <a href="https://www.unicauca.edu.co" target="_blank"><img class="animated bounce hvr-buzz estilologo" src="<?= $this->basePath('img/logo.png') ?>" /></a>
+                                    <p style="color: #FFFFFF;"><b>Universidad del Cauca</b></p>
+                                    <p><small>División TIC &copy; Copyright 2023</small></p>
                                 </div>
                             </div>
                     </form>

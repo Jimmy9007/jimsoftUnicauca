@@ -58,7 +58,7 @@ function validarGuardar(evt, formulario, tipo) {
 function verificarPassword() {
     if ($("#password").val() !== '') {
         if ($("#password").val().length < 6) {
-            Swal.fire('EL PASSWORD DEBE TENER AL MENOS 6 CARACTERES', 'JimSoft', 'error');
+            Swal.fire('EL PASSWORD DEBE TENER AL MENOS 6 CARACTERES', 'GestorPortal', 'error');
             $("#password").attr('type', 'password');
             $("#passwordConfirm").attr('type', 'password');
             $("#password").val('');
@@ -68,7 +68,7 @@ function verificarPassword() {
     }
     if ($("#password").val() !== '' && $("#passwordConfirm").val() !== '') {
         if ($("#password").val() !== $("#passwordConfirm").val()) {
-            Swal.fire('EL PASSWORD Y SU CONFIRMACION NO COINCIDEN', 'JimSoft', 'error');
+            Swal.fire('EL PASSWORD Y SU CONFIRMACION NO COINCIDEN', 'GestorPortal', 'error');
             $("#password").attr('type', 'password');
             $("#passwordConfirm").attr('type', 'password');
             $("#password").val('');
@@ -82,7 +82,7 @@ function guardarNuevoPassword() {
         html:
             '<h2><b>PARA QUE EL CAMBIO DE CONTRASEÑA SEA REGISTRADO LA SESION ACTUAL DEBE CERRARSE</b></h2>' +
             '<h4><small>&#191;DESEA REGISTRAR EL CAMBIO DE CONTRASEÑA&#63;</small></h4>' +
-            '<p class="animated bounce estilologo"><i><i class="fa fa-paw"></i>JimSoft</i></p>',
+            '<p class="animated bounce estilologo"><i><i class="fa fa-paw"></i>GestorPortal</i></p>',
         icon: 'info',
         allowOutsideClick: false,
         confirmButtonText: 'Aceptar',
@@ -102,12 +102,12 @@ function setNuevoPassword(respuesta) {
             Swal.fire({
                 title: 'LA CONTRASEÑA FUE ACTUALIZADA',
                 icon: 'success',
-                text: 'JimSoft',
+                text: 'GestorPortal',
                 allowOutsideClick: false,
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = '/jimsoft/cerrarsesion';
+                    location.href = '/gestorportal/cerrarsesion';
                 }
             });
             break;
@@ -115,7 +115,7 @@ function setNuevoPassword(respuesta) {
             Swal.fire({
                 title: 'LA CONTRASEÑA NO FUE ACTUALIZADA',
                 icon: 'error',
-                text: 'JimSoft',
+                text: 'GestorPortal',
                 allowOutsideClick: false,
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
@@ -128,7 +128,7 @@ function setNuevoPassword(respuesta) {
             Swal.fire({
                 title: 'LA CONTRASEÑA ACTUAL ES INCORRECTA',
                 icon: 'error',
-                text: 'JimSoft',
+                text: 'GestorPortal',
                 allowOutsideClick: false,
                 confirmButtonText: 'Aceptar',
             }).then((result) => {

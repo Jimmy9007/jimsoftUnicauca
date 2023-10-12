@@ -100,7 +100,7 @@ class AccesoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR USUARIO - ContratolaboralController->registrar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL USUARIO NO FUE REGISTRADO EN JIMSOFT.');
@@ -185,7 +185,7 @@ class AccesoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " ACTUALIZAR USUARIO - ContratolaboralController->editar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL USUARIO NO FUE ACTUALIZADO EN JIMSOFT.');
@@ -247,7 +247,7 @@ class AccesoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " ELIMINAR USUARIO - ContratolaboralController->eliminar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL USUARIO NO FUE ELIMINADA DE JIMSOFT.');

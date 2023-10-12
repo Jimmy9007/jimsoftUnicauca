@@ -47,7 +47,7 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-        'base_path' => '/jimsoft/public/',
-        'base_url' => '/jimsoft/'
+        'base_path' => '/gestorportal/public/',
+        'base_url' => '/gestorportal/'
     ],
 ];

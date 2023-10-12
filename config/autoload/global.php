@@ -24,11 +24,11 @@ $servidor = $host . ':' . $puerto;
 return [
     'db' => [
         /* 'driver' => 'Pdo',
-        'dsn' => "mysql:dbname=jimsoft_bd;host=$servidor;charset=utf8", */
+        'dsn' => "mysql:dbname=gestorportal_bd;host=$servidor;charset=utf8", */
         'adapters' => [
-            'jimsoft_bd' => [
+            'gestorportal_bd' => [
                 'driver' => 'Pdo',
-                'dsn' => "mysql:dbname=jimsoft_bd;host=$servidor",
+                'dsn' => "mysql:dbname=gestorportal_bd;host=$servidor",
                 'driver_options' => [
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
                 ],

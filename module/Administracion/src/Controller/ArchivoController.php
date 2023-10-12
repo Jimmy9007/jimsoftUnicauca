@@ -138,7 +138,7 @@ class ArchivoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR ARCHIVO - ArchivoController->registrar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL ARCHIVO NO FUE REGISTRADO EN JIMSOFT.');
@@ -166,7 +166,7 @@ class ArchivoController extends AbstractActionController
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " EDITAR ARCHIVO - EmpleadoclienteController->registrar \n"
                         . $ex->getMessage()
                         . "\n----------------------------------------------------------------------- \n";
-                    $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+                    $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
                     $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE EDITADO EN JIMSOFT.');
@@ -230,7 +230,7 @@ class ArchivoController extends AbstractActionController
             $msgLog = "\n" . date('Y-m-d H:i:s') . " ELIMINAR ARCHIVO - ContratolaboralController->eliminar \n"
                 . $ex->getMessage()
                 . "\n----------------------------------------------------------------------- \n";
-            $file = fopen($this->rutaLog . 'jimsoft.log', 'a');
+            $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
             $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE ELIMINADA DE JIMSOFT.');

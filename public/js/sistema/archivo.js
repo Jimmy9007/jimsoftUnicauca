@@ -24,25 +24,25 @@ function verRegistrar() {
     $.get('registrar', {}, setFormulario);
     bloqueoAjax();
 }
-function verEditar(idEmpleado) {
-    $.get('editar', { idEmpleado: idEmpleado }, setFormulario);
+function verEditar(idArchivo) {
+    $.get('editar', { idArchivo: idArchivo }, setFormulario);
     bloqueoAjax();
 }
-function verDetalle(idEmpleado) {
-    $.get('detalle', { idEmpleado: idEmpleado }, setFormulario);
+function verDetalle(idArchivo) {
+    $.get('detalle', { idArchivo: idArchivo }, setFormulario);
     bloqueoAjax();
 }
-function verEliminar(idEmpleado) {
-    $.get('eliminar', { idEmpleado: idEmpleado }, setFormulario);
+function verEliminar(idArchivo) {
+    $.get('eliminar', { idArchivo: idArchivo }, setFormulario);
+    bloqueoAjax();
+}
+function verActivar(idArchivo) {
+    $.get('activar', { idArchivo: idArchivo }, setFormulario);
     bloqueoAjax();
 }
 function setFormulario(datos) {
     $("#divContenido").html(datos);
-    /*  ClassicEditor
-         .create(document.querySelector('#descripcion'))
-         .catch(error => {
-             console.error(error);
-         }); */
+    /* CKEDITOR.replace("descripcion"); */
     $('#modalFormulario').modal('show');
 }
 
@@ -63,6 +63,53 @@ function validarGuardar(evt, formulario, tipo) {
             bloqueoAjax();
         }
     });
+}
+//------------------------------------------------------------------------------
+function selectTipo(tipo) {
+    if (tipo == 'Convocatorias') {
+        $("#idResolucion").val("");
+        $('#inicioConvocatoria').attr('type', 'date');
+        $('#finConvocatoria').attr('type', 'date');
+        $("#divInicioConvocatoria").show('slow');
+        $("#divFinConvocatoria").show('slow');
+        $('#inicioConvocatoria').attr('required', true);
+        $('#finConvocatoria').attr('required', true);
+        $("#divResolucion").hide("slow");
+        $('#idResolucion').attr('required', false);
+    } else if (tipo == 'Resoluciones') {
+        $('#inicioConvocatoria').attr('type', 'text');
+        $('#finConvocatoria').attr('type', 'text');
+        $("#inicioConvocatoria").val('0000-00-00');
+        $("#finConvocatoria").val('0000-00-00');
+        $("#divResolucion").show('slow');
+        $('#idResolucion').attr('required', true);
+        $("#divInicioConvocatoria").hide("slow");
+        $("#divFinConvocatoria").hide("slow");
+        $('#inicioConvocatoria').attr('required', false);
+        $('#finConvocatoria').attr('required', false);
+    } else {
+        $('#inicioConvocatoria').attr('type', 'text');
+        $('#finConvocatoria').attr('type', 'text');
+        $("#inicioConvocatoria").val('0000-00-00');
+        $("#finConvocatoria").val('0000-00-00');
+        $("#idResolucion").val("");
+        $("#divInicioConvocatoria").hide("slow");
+        $("#divFinConvocatoria").hide("slow");
+        $("#divResolucion").hide("slow");
+        $('#inicioConvocatoria').attr('required', false);
+        $('#finConvocatoria').attr('required', false);
+        $('#idResolucion').attr('required', false);
+    }
+}
+//------------------------------------------------------------------------------
+function actualizarArchivo() {
+    var idArchivo = $("#idArchivo").val();
+    $.get('actualizararchivo', { idArchivo: idArchivo }, setFormularioAux);
+    bloqueoAjax();
+}
+function setFormularioAux(datos) {
+    $("#divContenidoAux").html(datos);
+    $('#modalFormularioAux').modal('show');
 }
 //------------------------------------------------------------------------------
 

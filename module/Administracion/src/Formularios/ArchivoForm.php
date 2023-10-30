@@ -8,7 +8,7 @@ use Laminas\Form\Element;
 class ArchivoForm extends Form
 {
 
-    public function __construct($accion = '', $fecha = '')
+    public function __construct($accion = '', $listaDepenedencias = array())
     {
         switch ($accion) {
             case 'registrar':
@@ -31,6 +31,16 @@ class ArchivoForm extends Form
                 $required = false;
                 $disabled = true;
                 break;
+            case 'activar':
+                $onsubmit = 'return validarGuardar(event, this,"ACTIVAR")';
+                $required = false;
+                $disabled = true;
+                break;
+            case 'actualizararchivo':
+                $onsubmit = 'return validarGuardar(event, this,"EDITAR")';
+                $required = true;
+                $disabled = true;
+                break;
             default:
                 $onsubmit = '';
                 $required = false;
@@ -47,15 +57,29 @@ class ArchivoForm extends Form
         $this->setAttribute('onsubmit', $onsubmit);
 
         $this->add([
+            'type' => Element\Select::class,
+            'name' => 'idEmitido',
+            'options' => [
+                'label' => 'Dependencias *',
+                'empty_option' => 'Seleccione...',
+                'value_options' => $listaDepenedencias,
+                'disable_inarray_validator' => true,
+            ],
+            'attributes' => [
+                'required' => true,
+                'class' => 'form-control',
+                'id' => 'idEmitido',
+            ],
+        ]);
+        $this->add([
             'type' => Element\Text::class,
             'name' => 'idResolucion',
             'options' => [
-                'label' => 'Resolucion *',
+                'label' => 'Resolucion',
             ],
             'attributes' => [
-                'maxlength' => 25,
                 'readonly' => !$required,
-                'required' => $required,
+                'required' => !$required,
                 'class' => 'form-control',
                 'id' => 'idResolucion',
             ],
@@ -104,6 +128,7 @@ class ArchivoForm extends Form
                 'disable_inarray_validator' => true,
             ],
             'attributes' => [
+                'onchange' => 'selectTipo(this.value)',
                 'readonly' => !$required,
                 'required' => $required,
                 'class' => 'form-control',
@@ -114,7 +139,7 @@ class ArchivoForm extends Form
             'type' => Element\Date::class,
             'name' => 'publicacion',
             'options' => [
-                'label' => 'Publicacion ',
+                'label' => 'Publicacion *',
             ],
             'attributes' => [
                 'class' => 'form-control',
@@ -123,6 +148,60 @@ class ArchivoForm extends Form
                 'id' => 'publicacion',
             ],
         ]);
+
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'inicioConvocatoria',
+            'options' => [
+                'label' => 'Inicio Convocatoria *',
+            ],
+            'attributes' => [
+                'readonly' => !$required,
+                'required' => !$required,
+                'class' => 'form-control',
+                'id' => 'inicioConvocatoria',
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'finConvocatoria',
+            'options' => [
+                'label' => 'Fin Convocatoria *',
+            ],
+            'attributes' => [
+                'readonly' => !$required,
+                'required' => !$required,
+                'class' => 'form-control',
+                'id' => 'finConvocatoria',
+            ],
+        ]);
+        /* $this->add([
+            'type' => Element\Date::class,
+            'name' => 'inicioConvocatoria',
+            'options' => [
+                'label' => 'Inicio Convocatoria *',
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+                'readonly' => !$required,
+                'required' => !$required,
+                'id' => 'inicioConvocatoria',
+            ],
+        ]);
+        $this->add([
+            'type' => Element\Date::class,
+            'name' => 'finConvocatoria',
+            'options' => [
+                'label' => 'Fin Convocatoria *',
+            ],
+            'attributes' => [
+                'class' => 'form-control',
+                'readonly' => !$required,
+                'required' => !$required,
+                'id' => 'finConvocatoria',
+            ],
+        ]); */
         $this->add([
             'type' => Element\File::class,
             'name' => 'archivo',
@@ -131,7 +210,6 @@ class ArchivoForm extends Form
             ],
             'attributes' => [
                 'maxlength' => 80,
-                'style' => 'text-transform: uppercase',
                 'readonly' => !$required,
                 'required' => $required,
                 'class' => 'form-control',
@@ -155,7 +233,6 @@ class ArchivoForm extends Form
                 'id' => 'idArchivo',
             ],
         ]);
-
         $this->add([
             'type' => Element\Text::class,
             'name' => 'estado',

@@ -62,8 +62,13 @@ class AccesoController extends AbstractActionController
         foreach ($empleados  as $empleado) {
             $listaEmpleado[$empleado['idEmpleadoCliente']] = $empleado['nombre'] . ' ' . $empleado['apellido'];
         }
+        $roles = $this->DAO->getRoles();
+        $listaRoles = array();
+        foreach ($roles  as $rol) {
+            $listaRoles[$rol['idRol']] = $rol['rol'];
+        }
         //----------------------------------------------------------------------
-        $form = new AccesoForm('registrar', $listaEmpleado);
+        $form = new AccesoForm('registrar', $listaEmpleado, $listaRoles);
         $request = $this->getRequest();
         if (!$request->isPost()) {
             $view = new ViewModel(['form' => $form]);
@@ -94,7 +99,8 @@ class AccesoController extends AbstractActionController
         $accesoOBJ->setFechahorareg(date('Y-m-d H:i:s'));
         $accesoOBJ->setFechahoramod('0000-00-00 00:00:00');
         try {
-            $this->DAO->registrar($accesoOBJ);
+            $idRol = (int) $this->params()->fromPost('idRol', 0);
+            $this->DAO->registrar($accesoOBJ, $idRol);
             $this->flashMessenger()->addSuccessMessage('EL USUARIO FUE REGISTRADO EN JIMSOFT');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR USUARIO - ContratolaboralController->registrar \n"

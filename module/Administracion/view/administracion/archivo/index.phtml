@@ -139,7 +139,7 @@ $this->headScript()->prependScript('
                                     <th data-toggle="tooltip" title="ID" scope="col"><i class="fa fa-key"></i></th>
                                     <th data-toggle="tooltip" title="OPCIONES" scope="col"><i class="fa fa-cog fa-spin fa-lg"></i></th>
                                     <th scope="col"><i class="fas fa-id-card"></i> NOMBRE</th>
-                                    <th scope="col"><i class="fas fa-id-card"></i> RESOLUCION</th>
+                                    <th scope="col"><i class="fas fa-id-card"></i> TIPO</th>
                                     <th scope="col"><i class="fas fa-id-card"></i> ESTADO</th>
                                     <th scope="col"><i class="fas fa-calendar"></i> REGISTRADO</th>
                                 </tr>
@@ -147,14 +147,33 @@ $this->headScript()->prependScript('
                             <tbody>
                                 <?php
                                 foreach ($this->fetchAll as $qs) {
+                                    $color = '';
+                                    $botonPlay = '';
+                                    $botonStop = '';
+                                    if ($qs['estado'] == 'Activo') {
+                                        $color = 'green';
+                                        $botonPlay = 'hidden';
+                                        $botonStop = '';
+                                    } else {
+                                        $color = 'red';
+                                        $botonPlay = '';
+                                        $botonStop = 'hidden';
+                                    }
                                     echo '<tr>';
-                                    echo '<td>' . $qs['idArchivo ']  . '</td>';
+                                    echo '<td>' . $qs['idArchivo']  . '</td>';
                                     echo '<td>';
-                                    echo '<a href="javascript:verEditar(' . $qs['idArchivo ']  . ')" title="EDITAR"><i class="fa fa-edit"></i></a>';
+                                    echo '<a href="javascript:verDetalle(' . $qs['idArchivo'] . ')" title="VER"><i class="fas fa-eye"></i></a>';
+                                    echo '&nbsp;&nbsp;';
+                                    echo '<a href="javascript:verEditar(' . $qs['idArchivo']  . ')" title="EDITAR"><i class="fa fa-edit"></i></a>';
+                                    echo '&nbsp;&nbsp;';
+                                    echo '<a href="javascript:verEliminar(' . $qs['idArchivo']  . ')" title="ELIMINAR" ' . $botonStop . '><i class="fa fa-trash" style="color:red;"></i></a>';
+                                    echo '<a href="javascript:verActivar(' . $qs['idArchivo']  . ')" title="ACTIVAR" ' . $botonPlay . '><i class="fa fa-recycle" style="color:green;"></i></a>';
+                                    echo '&nbsp;&nbsp;';
+                                    echo '<a href="./../archivo/verArchivo/' . $qs['idArchivo']  . '" target="_blank" title="DESCARGAR"><i class="fa fa-download"></i></a>';
                                     echo '</td>';
-                                    echo '<td>' . substr($qs['nombre'], 0, 150)  . '</td>';
-                                    echo '<td>' . $qs['idResolucion']  . '</td>';
-                                    echo '<td>' . $qs['estado'] . '</td>';
+                                    echo '<td>' . substr($qs['nombre'], 0, 125)  . '</td>';
+                                    echo '<td>' . $qs['tipo']  . '</td>';
+                                    echo '<td><b style="color:' . $color . ';">' . $qs['estado'] . '</b></td>';
                                     echo '<td>' . $qs['fechahorareg']  . '</td>';
                                     echo '</tr>';
                                 }
@@ -199,72 +218,3 @@ $this->headScript()->prependScript('
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    var hoy = new Date();
-    jQuery(document).ready(function($) {
-        $("#calendar").fullCalendar({
-            height: 600,
-            locale: "es",
-            timeZone: "America/Bogota",
-            themeSystem: "bootstrap4",
-            defaultView: "month",
-            weekNumbers: true,
-            weekNumbersWithinDays: true,
-            nowIndicator: true,
-            now: hoy,
-            header: {
-                left: "prev,next,today",
-                center: "title",
-                right: "month,basickWeek,basickDay,agendaWeek,agendaDay,listMonth"
-            },
-            events: [
-                <?php
-                foreach ($this->fetchAll as $qs) {
-                    echo '{';
-                    echo 'idSolicitud: "' . $qs['idSolicitud'] .
-                        '",';
-                    echo 'title: "' . $qs['title'] .
-                        '",';
-                    echo 'descripcion: "' . $qs['descripcion'] .
-                        '",';
-                    if ($qs['allDay'] == 'true') {
-                        $start = explode(" ", $qs['start']);
-                        $end = explode(" ", $qs['end']);
-                        echo 'start: "' . $start[0] .
-                            '",';
-                        echo 'end: "' . $end[0] .
-                            '",';
-                    } else {
-                        echo 'start: "' . $qs['start'] .
-                            '",';
-                        echo 'end: "' . $qs['end'] .
-                            '",';
-                    }
-                    echo 'color: "' . $qs['color'] .
-                        '",';
-                    echo 'textColor: "' . $qs['textColor'] .
-                        '",';
-                    echo '},';
-                }
-                ?>
-            ],
-            dayClick: function(event, jsEvent, view) {
-                verRegistrar(event);
-            },
-            eventClick: function(event, jsEvent, view) {
-                verEditar(event.idSolicitud);
-                $(this).css("border-color", "#ff000a");
-            },
-            editable: true,
-            eventDrop: function(event, delta, revertFunc) {
-                moverEvento(event);
-            },
-            editable: true,
-            eventResize: function(event, delta, revertFunc) {
-                redimensionar(event);
-            },
-            navLinks: true,
-        })
-    });
-</script>';

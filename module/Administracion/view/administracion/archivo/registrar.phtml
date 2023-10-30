@@ -51,7 +51,31 @@ echo $this->form()->openTag($form);
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12">
+
+                <div class="form-group col-md-6 col-sm-12" id="divInicioConvocatoria" style="display: none;">
+                    <?= $this->formLabel($form->get('inicioConvocatoria')) ?>
+                    <div class="input-group">
+                        <?= $this->formElement($form->get('inicioConvocatoria')) ?>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fas fa-text-width"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-12" id="divFinConvocatoria" style="display: none;">
+                    <?= $this->formLabel($form->get('finConvocatoria')) ?>
+                    <div class="input-group">
+                        <?= $this->formElement($form->get('finConvocatoria')) ?>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fas fa-text-width"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12" id="divResolucion" style="display: none;">
                     <?= $this->formLabel($form->get('idResolucion')) ?>
                     <div class="input-group">
                         <?= $this->formElement($form->get('idResolucion')) ?>
@@ -73,6 +97,17 @@ echo $this->form()->openTag($form);
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-md-6 col-sm-12">
+                    <?= $this->formLabel($form->get('idEmitido')) ?>
+                    <div class="input-group">
+                        <?= $this->formElement($form->get('idEmitido')) ?>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fas fa-file-pdf-o"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </fieldset>
@@ -85,5 +120,6 @@ echo $this->form()->openTag($form);
 </div>
 <?php
 echo $this->formHidden($form->get('idArchivo')->setValue(0));
+/* echo $this->formHidden($form->get('idEmitido')->setValue(0)); */
 echo $this->form()->closeTag();
 ?>

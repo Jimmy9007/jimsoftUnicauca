@@ -44,6 +44,13 @@ class AccesoDAO extends AbstractTableGateway
         //        echo $select->getSqlString();
         return $this->selectWith($select)->toArray();
     }
+    public function getRoles()
+    {
+        $this->table = 'roles';
+        $select = new Select($this->table);
+        //        echo $select->getSqlString();
+        return $this->selectWith($select)->toArray();
+    }
     public function getEmpleadoCliente($idEmpleadoCliente = 0)
     {
         $select = new Select('empleadocliente');
@@ -92,8 +99,10 @@ class AccesoDAO extends AbstractTableGateway
     }
     //------------------------------------------------------------------------------
 
-    public function registrar(Acceso $tclOBJ = null)
+    public function registrar(Acceso $tclOBJ = null, $idRol = 0)
     {
+        $connection = $this->getAdapter()->getDriver()->getConnection();
+        $connection->beginTransaction();
         try {
             $this->table = 'usuario';
             $insert = new Insert($this->table);
@@ -102,7 +111,17 @@ class AccesoDAO extends AbstractTableGateway
             $insert->values($datos);
             //echo $insert->getSqlString();
             $this->insertWith($insert);
+            $idUsuario = $this->getLastInsertValue();
+            $this->table = 'usuario_rol';
+            $insert = new Insert($this->table);
+            $insert->values([
+                'idUsuario' => $idUsuario,
+                'idRol' => $idRol,
+            ]);
+            $this->insertWith($insert);
+            $connection->commit();
         } catch (\Exception $e) {
+            $connection->rollback();
             throw new \Exception($e);
         }
     }

@@ -75,12 +75,18 @@
 
 <body class="nav-md">
     <?php
+
+    use Laminas\Session\Container;
+
     $loginUsuario = 'SESION NO INICIADA';
     $auth = new Laminas\Authentication\AuthenticationService();
     if ($auth->hasIdentity()) {
         $infoSesion['login'] = $auth->getIdentity()->login;
         $infoSesion['usuario'] = $auth->getIdentity()->usuario;
         $infoSesion['foto'] = $auth->getIdentity()->foto;
+        $rol = $auth->getIdentity()->login;
+        $container = new Container();
+        $rbac = $container->rbac;
     ?>
         <div class="container body">
             <div class="main_container">
@@ -116,13 +122,19 @@
                                     <li><a href="<?= $this->url('administracion/solicitud', array('controller' => 'solicitud', 'action' => 'index')) ?>"><i class="fa fa-graduation-cap"></i> SOLICITUDES</a></li>
                                     <li><a href="<?= $this->url('administracion/archivo', array('controller' => 'archivo', 'action' => 'index')) ?>"><i class="fa fa-file-pdf-o"></i> ARCHIVOS</a></li>
                                     <li><a href="<?= $this->url('administracion/lumen', array('controller' => 'lumen', 'action' => 'index')) ?>"><i class="fa fa-files-o"></i> LUMEN</a></li>
-                                    <li><a><i class="fa fa-users"></i> GESTOR USUARIOS <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?= $this->url('usermanager/acceso', array('controller' => 'acceso', 'action' => 'index')) ?>">Accesos</a></li>
-                                            <li><a href="<?= $this->url('usermanager/empleadocliente', array('controller' => 'empleadocliente', 'action' => 'index')) ?>">Usuarios</a></li>
-                                            <li><a href="form_validation.html">Roles</a></li>
-                                        </ul>
-                                    </li>
+                                    <?php
+                                    if (isset($container->rbac)) {
+                                        if ($rbac->isGranted($rol, 'Usermanager\Controller\EmpleadoclienteController.index:GET')) { ?>
+                                            <li><a><i class="fa fa-users"></i> GESTOR USUARIOS <span class="fa fa-chevron-down"></span></a>
+                                                <ul class="nav child_menu">
+                                                    <li><a href="<?= $this->url('usermanager/acceso', array('controller' => 'acceso', 'action' => 'index')) ?>">Accesos</a></li>
+                                                    <li><a href="<?= $this->url('usermanager/empleadocliente', array('controller' => 'empleadocliente', 'action' => 'index')) ?>">Usuarios</a></li>
+                                                    <li><a href="form_validation.html">Roles</a></li>
+                                                </ul>
+                                            </li>
+                                    <?php }
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -269,7 +281,7 @@
                             <p style="color: #FFFFFF;"><b>Universidad del Cauca</b></p>
                             <h1 class="error-number">404</h1>
                             <h2>Lo sentimos pero no pudimos encontrar esta página.</h2>
-                            <p>Esta página que estás buscando no existe <a href="/gestorportal" style="color:#9D0311;">&iquest;Ir al inicio&quest;</a>
+                            <p>Esta página que estás buscando no existe <a href="/gestorportalv2" style="color:#9D0311;">&iquest;Ir al inicio&quest;</a>
                             </p>
                             <p><small>División TIC &copy; Copyright 2023</small></p>
                             <div class="mid_center">

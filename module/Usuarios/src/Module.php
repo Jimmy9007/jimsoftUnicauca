@@ -14,17 +14,21 @@ use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\Authentication\AuthenticationService;
 
-class Module implements ConfigProviderInterface {
+class Module implements ConfigProviderInterface
+{
 
-    public function onBootstrap(MvcEvent $e) {
+    public function onBootstrap(MvcEvent $e)
+    {
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         $this->bootstrapSession($e);
         $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH, array($this, 'validarSession'));
+        $eventManager->attach(\Zend\Mvc\MvcEvent::EVENT_ROUTE, array($this, 'verificarPermisos'));
     }
 
-    public function bootstrapSession(MvcEvent $e) {
+    public function bootstrapSession(MvcEvent $e)
+    {
         $session = $e->getApplication()->getServiceManager()->get(SessionManager::class);
         $session->start();
 
@@ -72,13 +76,14 @@ class Module implements ConfigProviderInterface {
         }
     }
 
-//------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
 
-    public function validarSession(MvcEvent $e) {
+    public function validarSession(MvcEvent $e)
+    {
         $controlador = $e->getRouteMatch()->getParam('controller');
         $auth = new AuthenticationService();
         if (!$auth->hasIdentity() && $controlador != 'Usuarios\Controller\LoginController') {
-//            echo '<br><br> F U E R A <br><br>';
+            //            echo '<br><br> F U E R A <br><br>';
             $url = $e->getRouter()->assemble(array(), array('name' => 'login'));
             $response = $e->getResponse();
             $response->getHeaders()->addHeaderLine('Location', $url);
@@ -87,13 +92,60 @@ class Module implements ConfigProviderInterface {
         }
     }
 
-//------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    public function verificarPermisos(MvcEvent $event)
+    {
+        $accionesPermitidas = ['noAutorizado', 'cerrarsesion'];
+        $superUsuarios = [1];
+        $authService = new AuthenticationService();
+        if ($authService->hasIdentity()) {
+            $rol = $authService->getIdentity()->login;
+            $idUsuario = $authService->getIdentity()->idUsuario;
+            $parametrosURL = $event->getRouteMatch()->getParams();
+            $controlador = $parametrosURL['controller'];
+            $accion = $parametrosURL['action'];
+            $metodo = $event->getRequest()->getMethod();
+            $permiso = $controlador . '.' . $accion . ':' . $metodo;
+            /* echo "<pre>$permiso</pre>"; */
+            if (in_array($idUsuario, $superUsuarios)) {
+                return;
+            }
+            if (in_array($accion, $accionesPermitidas)) {
+                return;
+            }
+            if ($controlador == 'Inicio\Controller\BandejaController' && $accion == 'index') {
+                return;
+            }
+            $container = new Container();
+            $rbac = $container->rbac;
+            if (isset($container->rbac)) {
+                if (!$rbac->isGranted($rol, $permiso)) {
+                    error_log("El ROL $rol NO TIENE PERMISO PARA $permiso");
+                    $url = $event->getRouter()->assemble([], ['name' => 'no-autorizado']);
+                    $response = $event->getResponse();
+                    $response->getHeaders()->addHeaderLine('Location', $url);
+                    $response->sendHeaders();
+                    exit();
+                }
+            } else {
+                error_log("(Error RBAC) El ROL $rol NO TIENE PERMISO PARA $permiso");
+                $url = $event->getRouter()->assemble([], ['name' => 'no-autorizado']);
+                $response = $event->getResponse();
+                $response->getHeaders()->addHeaderLine('Location', $url);
+                $response->sendHeaders();
+                exit();
+            }
+        }
+    }
+    //------------------------------------------------------------------------------
 
-    public function getConfig() {
+    public function getConfig()
+    {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function getServiceConfig() {
+    public function getServiceConfig()
+    {
         return [
             'factories' => [
                 SessionManager::class => function ($container) {
@@ -130,9 +182,9 @@ class Module implements ConfigProviderInterface {
                     }
 
                     $sessionManager = new SessionManager(
-                            $sessionConfig,
-                            $sessionStorage,
-                            $sessionSaveHandler
+                        $sessionConfig,
+                        $sessionStorage,
+                        $sessionSaveHandler
                     );
 
                     Container::setDefaultManager($sessionManager);
@@ -152,14 +204,14 @@ class Module implements ConfigProviderInterface {
         ];
     }
 
-    public function getControllerConfig() {
+    public function getControllerConfig()
+    {
         return [
             'factories' => [
                 Controller\LoginController::class => function ($container) {
-                    return new Controller\LoginController($container->get('gestorportal_bd'), $container->get(Modelo\DAO\UsuarioDAO::class));
-                },
+                    return new Controller\LoginController($container->get('IdentityManager'));
+                }
             ],
         ];
     }
-
 }

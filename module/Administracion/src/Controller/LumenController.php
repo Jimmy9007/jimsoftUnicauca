@@ -136,7 +136,7 @@ class LumenController extends AbstractActionController
         $lumenOBJ->setFechahoramod('0000-00-00 00:00:00');
         try {
             $this->DAO->registrar($lumenOBJ);
-            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE REGISTRADO EN JIMSOFT');
+            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE REGISTRADO EN GESTORPORTAL');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR ARCHIVO - ArchivoController->registrar \n"
                 . $ex->getMessage()
@@ -144,7 +144,7 @@ class LumenController extends AbstractActionController
             $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
-            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL ARCHIVO NO FUE REGISTRADO EN JIMSOFT.');
+            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL ARCHIVO NO FUE REGISTRADO EN GESTORPORTAL.');
         }
         return $this->redirect()->toUrl('index');
     }
@@ -163,7 +163,7 @@ class LumenController extends AbstractActionController
                 $lumenOBJ->setFechahoramod(date('Y-m-d H:i:s'));
                 try {
                     $this->DAO->editar($lumenOBJ);
-                    $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE EDITADO EN JIMSOFT');
+                    $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE EDITADO EN GESTORPORTAL');
                     return $this->redirect()->toUrl('index');
                 } catch (\Exception $ex) {
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " EDITAR ARCHIVO - EmpleadoclienteController->registrar \n"
@@ -172,10 +172,10 @@ class LumenController extends AbstractActionController
                     $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
-                    $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE EDITADO EN JIMSOFT.');
+                    $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE EDITADO EN GESTORPORTAL.');
                 }
             } else {
-                $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE, EL ARCHIVO NO FUE EDITADO EN JIMSOFT');
+                $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE, EL ARCHIVO NO FUE EDITADO EN GESTORPORTAL');
                 return $this->redirect()->toUrl('index');
             }
         }
@@ -228,7 +228,7 @@ class LumenController extends AbstractActionController
             $lumenOBJ->setModificadopor($modificadopor);
             $lumenOBJ->setFechahoramod(date('Y-m-d H:i:s'));
             $this->DAO->eliminar($lumenOBJ);
-            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE ELIMINADA DE JIMSOFT');
+            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE ELIMINADA DE GESTORPORTAL');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " ELIMINAR ARCHIVO - ContratolaboralController->eliminar \n"
                 . $ex->getMessage()
@@ -236,7 +236,7 @@ class LumenController extends AbstractActionController
             $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
-            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE ELIMINADA DE JIMSOFT.');
+            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL ARCHIVO NO FUE ELIMINADA DE GESTORPORTAL.');
         }
         return $this->redirect()->toUrl('index?idEmpleadoCliente=' . $lumenOBJ->getIdEmpleadoCliente());
     }

@@ -18,7 +18,7 @@ class Acceso implements InputFilterAwareInterface
 
     private $idUsuario;
     private $idEmpleadoCliente;
-    private $idRol;
+   /*  private $idRol; */
     private $usuario;
     private $login;
     private $password;
@@ -131,22 +131,22 @@ class Acceso implements InputFilterAwareInterface
     /**
      * Get the value of idRol
      */
-    public function getIdRol()
+  /*   public function getIdRol()
     {
         return $this->idRol;
-    }
+    } */
 
     /**
      * Set the value of idRol
      *
      * @return  self
      */
-    public function setIdRol($idRol)
+  /*   public function setIdRol($idRol)
     {
         $this->idRol = $idRol;
 
         return $this;
-    }
+    } */
 
     /**
      * Get the value of usuario

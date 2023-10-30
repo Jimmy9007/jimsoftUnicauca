@@ -8,7 +8,7 @@ use Laminas\Form\Element;
 class AccesoForm extends Form
 {
 
-    public function __construct($accion = '', $listaEmpleado = array())
+    public function __construct($accion = '', $listaEmpleado = array(), $listaRoles = array())
     {
         switch ($accion) {
             case 'registrar':
@@ -68,11 +68,7 @@ class AccesoForm extends Form
             'options' => [
                 'label' => 'Roles *',
                 'empty_option' => 'Seleccione...',
-                'value_options' => [
-                    '1' => 'Administrador',
-                    '2' => 'Empleado',
-                    '3' => 'Cliente',
-                ],
+                'value_options' => $listaRoles,
                 'disable_inarray_validator' => true,
             ],
             'attributes' => [

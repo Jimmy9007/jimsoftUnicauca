@@ -31,7 +31,6 @@ class PerfilDAO extends AbstractTableGateway
         $select->columns([
             'idUsuario',
             'idEmpleadoCliente',
-            'idRol',
             'usuario',
             'login',
             'password',
@@ -64,7 +63,6 @@ class PerfilDAO extends AbstractTableGateway
         $select->columns(array(
             'idUsuario',
             'idEmpleadoCliente',
-            'idRol',
             'usuario',
             'login',
             'password',

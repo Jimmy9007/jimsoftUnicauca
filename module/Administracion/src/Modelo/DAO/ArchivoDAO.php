@@ -28,10 +28,15 @@ class ArchivoDAO extends AbstractTableGateway
         $this->table = 'archivos';
         $select = new Select($this->table);
         $select->columns([
-            'idArchivo ',
+            'idArchivo',
+            'idEmitido',
             'idResolucion',
             'nombre',
             'descripcion',
+            'tipo',
+            'inicioConvocatoria',
+            'finConvocatoria',
+            'publicacion',
             'archivo',
             'estado',
             'registradopor',
@@ -51,10 +56,15 @@ class ArchivoDAO extends AbstractTableGateway
     {
         $select = new Select('archivos');
         $select->columns(array(
-            'idArchivo ',
+            'idArchivo',
+            'idEmitido',
             'idResolucion',
             'nombre',
             'descripcion',
+            'tipo',
+            'inicioConvocatoria',
+            'finConvocatoria',
+            'publicacion',
             'archivo',
             'estado',
             'registradopor',
@@ -97,7 +107,7 @@ class ArchivoDAO extends AbstractTableGateway
             $update = new Update($this->table);
             $datos = $archivoOBJ->getArrayCopy();
             $update->set($datos);
-            $update->where("archivos.idArchivo =  $idArchivo");
+            $update->where("archivos.idArchivo = $idArchivo");
             //echo $update->getSqlString();
             return $this->updateWith($update);
         } catch (\Exception $e) {
@@ -121,6 +131,31 @@ class ArchivoDAO extends AbstractTableGateway
             throw new \Exception($e);
         }
     }
+    public function activar(Archivo $archivoOBJ = null)
+    {
+        try {
+            $this->table = "archivos";
+            $update = new Update($this->table);
+            $update->set([
+                'estado' => 'Activo',
+                'modificadopor' => $archivoOBJ->getModificadopor(),
+                'fechahoramod' => $archivoOBJ->getFechahoramod(),
+            ]);
+            $update->where("archivos.idArchivo = " . $archivoOBJ->getIdArchivo());
+            //echo $update->getSqlString();
+            $this->updateWith($update);
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
+    }
 
+    //------------------------------------------------------------------------------
+    public function getDependencias()
+    {
+        $this->table = 'dependencias';
+        $select = new Select($this->table);
+        //        echo $select->getSqlString();
+        return $this->selectWith($select)->toArray();
+    }
     //------------------------------------------------------------------------------
 }

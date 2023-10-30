@@ -3,6 +3,7 @@
 namespace Usuarios;
 
 use Laminas\Router\Http\Segment;
+use Laminas\Db\Adapter\AdapterInterface;
 
 return [
     // The following section is new and should be added to your file:
@@ -25,6 +26,16 @@ return [
                     'defaults' => [
                         'controller' => Controller\LoginController::class,
                         'action' => 'cerrarsesion',
+                    ],
+                ],
+            ],
+            'no-autorizado' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/no-autorizado',
+                    'defaults' => [
+                        'controller' => Controller\LoginController::class,
+                        'action' => 'noAutorizado',
                     ],
                 ],
             ],
@@ -62,6 +73,15 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'usuarios' => __DIR__ . '/../view',
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            'IdentityManager' => Modelo\RBAC\IdentityManagerFactory::class,
+            'RbacDAO' => function ($container) {
+                $dbAdapter = $container->get('gestorportal_bd');
+                return new Modelo\DAO\RbacDAO($dbAdapter);
+            },
         ],
     ],
 ];

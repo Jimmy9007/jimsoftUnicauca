@@ -1,14 +1,29 @@
 <?php
 $form->prepare();
-$form->get('archivo')->setAttribute('readonly', true);
-$form->get('archivo')->setAttribute('type', 'text');
-$form->get('tipo')->setAttribute('readonly', true);
-$form->get('tipo')->setAttribute('type', 'text');
+$form->get('archivo')->setAttribute('required', true);
+$form->get('idEmitido')->setAttribute('readonly', true);
+$form->get('idEmitido')->setAttribute('required', false);
+$form->get('idEmitido')->setAttribute('type', 'text');
 echo $this->form()->openTag($form);
 ?>
 <div class="modal-body ui-front">
     <div style="padding: 10px" class="container-fluid">
         <fieldset>
+            <div class="row">
+                <div class="form-group col-md-12 col-sm-12">
+                    <?= $this->formLabel($form->get('archivo')) ?>
+                    <div class="input-group">
+                        <?= $this->formElement($form->get('archivo')) ?>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-file"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset hidden>
             <legend>Llene los datos del evento</legend>
             <div class="row">
                 <div class="form-group col-md-12 col-sm-12">
@@ -56,7 +71,7 @@ echo $this->form()->openTag($form);
                     </div>
                 </div>
 
-                <div class="form-group col-md-6 col-sm-12" id="divInicioConvocatoria">
+                <div class="form-group col-md-6 col-sm-12" id="divInicioConvocatoria" style="display: none;">
                     <?= $this->formLabel($form->get('inicioConvocatoria')) ?>
                     <div class="input-group">
                         <?= $this->formElement($form->get('inicioConvocatoria')) ?>
@@ -67,7 +82,7 @@ echo $this->form()->openTag($form);
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12" id="divFinConvocatoria">
+                <div class="form-group col-md-6 col-sm-12" id="divFinConvocatoria" style="display: none;">
                     <?= $this->formLabel($form->get('finConvocatoria')) ?>
                     <div class="input-group">
                         <?= $this->formElement($form->get('finConvocatoria')) ?>
@@ -79,7 +94,7 @@ echo $this->form()->openTag($form);
                     </div>
                 </div>
 
-                <div class="form-group col-md-6 col-sm-12" id="divResolucion">
+                <div class="form-group col-md-6 col-sm-12" id="divResolucion" style="display: none;">
                     <?= $this->formLabel($form->get('idResolucion')) ?>
                     <div class="input-group">
                         <?= $this->formElement($form->get('idResolucion')) ?>
@@ -91,30 +106,19 @@ echo $this->form()->openTag($form);
                     </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <?= $this->formLabel($form->get('archivo')) ?>
+                    <label class="control-label" for="idEmitido">Emitido</label>
                     <div class="input-group">
-                        <?= $this->formElement($form->get('archivo')) ?>
+                        <?= $this->formElement($form->get('idEmitido')) ?>
                         <div class="input-group-append">
                             <span class="input-group-text">
-                                <i class="fas fa-file-pdf-o"></i>
+                                <i class="fas fa-key"></i>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-6 col-sm-12">
-                <label class="control-label" for="idEmitido">Dependencia</label>
-                <div class="input-group">
-                    <?= $this->formElement($form->get('idEmitido')) ?>
-                    <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i class="fas fa-key"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
         </fieldset>
-        <fieldset>
+        <fieldset hidden>
             <legend>Informacion del registro</legend>
             <div class="form-row">
                 <div class="form-group col-md-4 col-sm-12">
@@ -188,7 +192,7 @@ echo $this->form()->openTag($form);
     </div>
 </div>
 <div class="modal-footer" style="padding: 20px">
-    <button type="submit" class="btn btn-danger" title="ELIMINAR ARCHIVO"><i class="fa fa-trash"></i> Eliminar</button>
+    <button type="submit" class="btn btn-success" title="ACTUALIZAR ARCHIVO"><i class="fas fa-save"></i> Actualizar Archivo</button>
     <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
 </div>
 <?php

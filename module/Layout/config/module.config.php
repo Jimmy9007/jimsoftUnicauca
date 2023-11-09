@@ -47,7 +47,7 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-        'base_path' => '/gestorportal/public/',
-        'base_url' => '/gestorportal/'
+        'base_path' => '/newportal/gestorportalv2/public/',
+        'base_url' => '/newportal/gestorportalv2/'
     ],
 ];

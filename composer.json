@@ -24,10 +24,8 @@
         "laminas/laminas-permissions-rbac": "^3.2",
         "laminas/laminas-file": "^2.11",
         "laminas/laminas-validator": "^2.17",
-        "laminas/laminas-navigation": "^2.18",
-        "laminas/laminas-recaptcha": "^3.6",
-        "laminas/laminas-router": "^3.11",
-        "laminas/laminas-crypt": "^3.10"
+        "laminas/laminas-navigation": "^2.15",
+        "laminas/laminas-crypt": "^3.8"
     },
     "autoload": {
         "psr-4": {

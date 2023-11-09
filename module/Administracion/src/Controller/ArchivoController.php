@@ -107,7 +107,7 @@ class ArchivoController extends AbstractActionController
                 $this->flashMessenger()->addErrorMessage('EL ARCHIVO DE RESPALDO ADJUNTO NO ESTA EN LOS LIMITES PERMITIDOS. <br> MINIMO: 250B  <br> MAXIMO: <b>2MB</b>');
                 return $this->redirect()->toUrl('index');
             }
-            $extensiones = new \Laminas\Validator\File\Extension(array('extension' => array('pdf')));
+            $extensiones = new \Laminas\Validator\File\Extension(array('extension' => array('pdf,docx,xlsx,pptx,zip')));
             if (!$extensiones->isValid($files['archivo'])) {
                 $this->flashMessenger()->addErrorMessage('EL ARCHIVO DE RESPALDO ADJUNTO NO ES PERMITIDO. <br> ARCHIVOS PERMITIDOS: <br> PDF');
                 return $this->redirect()->toUrl('index');
@@ -300,7 +300,7 @@ class ArchivoController extends AbstractActionController
             $archivoOBJ->setModificadopor($modificadopor);
             $archivoOBJ->setFechahoramod(date('Y-m-d H:i:s'));
             $this->DAO->activar($archivoOBJ);
-            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE ELIMINADA DE GESTORPORTAL');
+            $this->flashMessenger()->addSuccessMessage('EL ARCHIVO FUE RECUPERADO DE GESTORPORTAL');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " ELIMINAR ARCHIVO - ArchivoController->eliminar \n"
                 . $ex->getMessage()
@@ -399,7 +399,7 @@ class ArchivoController extends AbstractActionController
                         $this->flashMessenger()->addErrorMessage('EL ARCHIVO DE RESPALDO ADJUNTO NO ESTA EN LOS LIMITES PERMITIDOS. <br> MINIMO: 250B  <br> MAXIMO: <b>2MB</b>');
                         return $this->redirect()->toUrl('index');
                     }
-                    $extensiones = new \Laminas\Validator\File\Extension(array('extension' => array('pdf')));
+                    $extensiones = new \Laminas\Validator\File\Extension(array('extension' => array('pdf,docx,xlsx,pptx,zip')));
                     if (!$extensiones->isValid($files['archivo'])) {
                         $this->flashMessenger()->addErrorMessage('EL ARCHIVO DE RESPALDO ADJUNTO NO ES PERMITIDO. <br> ARCHIVOS PERMITIDOS: <br> txt');
                         return $this->redirect()->toUrl('index');

@@ -14,12 +14,12 @@
 //------------------------------------------------------------------------------
 /* $host = '190.90.224.252';
 $puerto = '6303'; */
-$host = 'localhost';
-$puerto = '3603';
-$servidor = $host . ':' . $puerto;
-//------------------------------------------------------------------------------
 //$host = 'localhost';
-//$servidor = $host; 
+//$puerto = '3306';
+//$servidor = $host . ':' . $puerto;
+//------------------------------------------------------------------------------
+$host = 'localhost';
+$servidor = $host; 
 //------------------------------------------------------------------------------
 return [
     'db' => [
@@ -28,7 +28,7 @@ return [
         'adapters' => [
             'gestorportal_bd' => [
                 'driver' => 'Pdo',
-                'dsn' => "mysql:dbname=gestorportal_bd;host=$servidor",
+                'dsn' => "mysql:dbname=gestorportalbdv2;host=$servidor",
                 'driver_options' => [
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
                 ],

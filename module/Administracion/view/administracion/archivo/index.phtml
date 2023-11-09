@@ -150,6 +150,8 @@ $this->headScript()->prependScript('
                                     $color = '';
                                     $botonPlay = '';
                                     $botonStop = '';
+                                    $icono = '';
+                                    $title = '';
                                     if ($qs['estado'] == 'Activo') {
                                         $color = 'green';
                                         $botonPlay = 'hidden';
@@ -158,6 +160,23 @@ $this->headScript()->prependScript('
                                         $color = 'red';
                                         $botonPlay = '';
                                         $botonStop = 'hidden';
+                                    }
+                                    $ext = explode(".", $qs['archivo']);
+                                    if ($ext[1] == 'zip') {
+                                        $icono = 'fa fa-file-archive-o';
+                                        $title = 'DESCARGAR ZIP';
+                                    } elseif ($ext[1] == 'pptx') {
+                                        $icono = 'fa fa-file-powerpoint-o';
+                                        $title = 'DESCARGAR POWERPOINT';
+                                    } elseif ($ext[1] == 'xlsx') {
+                                        $icono = 'fa fa-file-excel-o';
+                                        $title = 'DESCARGAR EXCEL';
+                                    } elseif ($ext[1] == 'docx') {
+                                        $icono = 'fa fa-file-word-o';
+                                        $title = 'DESCARGAR WORD';
+                                    } else {
+                                        $icono = 'fa fa-file-pdf-o';
+                                        $title = 'DESCARGAR PDF';
                                     }
                                     echo '<tr>';
                                     echo '<td>' . $qs['idArchivo']  . '</td>';
@@ -169,7 +188,7 @@ $this->headScript()->prependScript('
                                     echo '<a href="javascript:verEliminar(' . $qs['idArchivo']  . ')" title="ELIMINAR" ' . $botonStop . '><i class="fa fa-trash" style="color:red;"></i></a>';
                                     echo '<a href="javascript:verActivar(' . $qs['idArchivo']  . ')" title="ACTIVAR" ' . $botonPlay . '><i class="fa fa-recycle" style="color:green;"></i></a>';
                                     echo '&nbsp;&nbsp;';
-                                    echo '<a href="./../archivo/verArchivo/' . $qs['idArchivo']  . '" target="_blank" title="DESCARGAR"><i class="fa fa-download"></i></a>';
+                                    echo '<a href="./../archivo/verArchivo/' . $qs['idArchivo']  . '" target="_blank" title="' . $title . '"><i class="' . $icono . '"></i></a>';
                                     echo '</td>';
                                     echo '<td>' . substr($qs['nombre'], 0, 125)  . '</td>';
                                     echo '<td>' . $qs['tipo']  . '</td>';

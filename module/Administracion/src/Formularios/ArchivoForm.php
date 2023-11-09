@@ -206,12 +206,14 @@ class ArchivoForm extends Form
             'type' => Element\File::class,
             'name' => 'archivo',
             'options' => [
-                'label' => 'Archivo *',
+                'label' => 'Archivo: pdf, docx, xlsx, pptx y zip',
             ],
             'attributes' => [
-                'maxlength' => 80,
+                'title' => 'Archivos permitidos: pdf, docx, xlsx, pptx y zip',
+                'onchange' => 'validarAdjunto()',
                 'readonly' => !$required,
                 'required' => $required,
+                'accept' => '.pdf,.docx,.xlsx,.pptx,.zip',
                 'class' => 'form-control',
                 'id' => 'archivo',
             ],

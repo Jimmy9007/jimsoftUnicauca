@@ -93,7 +93,7 @@ class SolicitudController extends AbstractActionController
         $eventoOBJ->setFechahoramod('0000-00-00 00:00:00');
         try {
             $this->DAO->registrar($eventoOBJ);
-            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE REGISTRADO EN GESTORPORTAL');
+            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE REGISTRADO EN JIMSOFT');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " REGISTRAR EVENTO - EventoController->registrar \n"
                 . $ex->getMessage()
@@ -101,7 +101,7 @@ class SolicitudController extends AbstractActionController
             $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
-            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL EVENTO NO FUE REGISTRADO EN GESTORPORTAL.');
+            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EL EVENTO NO FUE REGISTRADO EN JIMSOFT.');
         }
         return $this->redirect()->toUrl('index');
     }
@@ -120,7 +120,7 @@ class SolicitudController extends AbstractActionController
                 $eventoOBJ->setFechahoramod(date('Y-m-d H:i:s'));
                 try {
                     $this->DAO->editar($eventoOBJ);
-                    $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE EDITADO EN GESTORPORTAL');
+                    $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE EDITADO EN JIMSOFT');
                     return $this->redirect()->toUrl('index');
                 } catch (\Exception $ex) {
                     $msgLog = "\n" . date('Y-m-d H:i:s') . " EDITAR EVENTO - EventoController->registrar \n"
@@ -129,10 +129,10 @@ class SolicitudController extends AbstractActionController
                     $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
                     fwrite($file, $msgLog);
                     fclose($file);
-                    $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL EVENTO NO FUE EDITADO EN GESTORPORTAL.');
+                    $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! <br>EL EVENTO NO FUE EDITADO EN JIMSOFT.');
                 }
             } else {
-                $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE, EL EVENTO NO FUE EDITADO EN GESTORPORTAL');
+                $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE, EL EVENTO NO FUE EDITADO EN JIMSOFT');
                 return $this->redirect()->toUrl('index');
             }
         }
@@ -162,7 +162,7 @@ class SolicitudController extends AbstractActionController
         try {
             $this->DAO->eliminar($idEvento, $registradopor);
             $successOK = 1;
-            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE ELIMINADO en GESTORPORTAL');
+            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE ELIMINADO en JIMSOFT');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " MOVER EVENTO - EventoController->moverevento \n"
                 . $ex->getMessage()
@@ -170,7 +170,7 @@ class SolicitudController extends AbstractActionController
             $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
-            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN GESTORPORTAL.');
+            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN JIMSOFT.');
         }
         return new JsonModel(array(
             'successOK' => $successOK,
@@ -188,7 +188,7 @@ class SolicitudController extends AbstractActionController
         try {
             $this->DAO->moverevento($idEvento, $start, $end, $registradopor);
             $successOK = 1;
-            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE MOVIDO: de <b>' . $start . '</b> a <b>' . $end . '</b> en GESTORPORTAL');
+            $this->flashMessenger()->addSuccessMessage('EL EVENTO FUE MOVIDO: de <b>' . $start . '</b> a <b>' . $end . '</b> en JIMSOFT');
         } catch (\Exception $ex) {
             $msgLog = "\n" . date('Y-m-d H:i:s') . " MOVER EVENTO - EventoController->moverevento \n"
                 . $ex->getMessage()
@@ -196,7 +196,7 @@ class SolicitudController extends AbstractActionController
             $file = fopen($this->rutaLog . 'gestorportal.log', 'a');
             fwrite($file, $msgLog);
             fclose($file);
-            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN GESTORPORTAL.');
+            $this->flashMessenger()->addErrorMessage('SE HA PRESENTADO UN INCONVENIENTE! EN JIMSOFT.');
         }
         return new JsonModel(array(
             'successOK' => $successOK,

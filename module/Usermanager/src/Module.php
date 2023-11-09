@@ -31,6 +31,10 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\PerfilDAO($dbAdapter);
                 },
+                Modelo\DAO\RolDAO::class => function ($container) {
+                    $dbAdapter = $container->get('gestorportal_bd');
+                    return new Modelo\DAO\RolDAO($dbAdapter);
+                },
             ],
         ];
     }
@@ -47,6 +51,9 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\PerfilController::class => function ($container) {
                     return new Controller\PerfilController($container->get(Modelo\DAO\PerfilDAO::class));
+                },
+                Controller\RolController::class => function ($container) {
+                    return new Controller\RolController($container->get(Modelo\DAO\RolDAO::class));
                 },
             ],
         ];

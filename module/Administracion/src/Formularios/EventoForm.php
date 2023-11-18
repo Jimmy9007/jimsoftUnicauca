@@ -136,7 +136,7 @@ class EventoForm extends Form
             ],
             'attributes' => [
                 'maxlength' => 20,
-                'value' => "#3987ad",
+                'value' => "#000066",
                 'style' => 'text-transform: uppercase',
                 'readonly' => !$required,
                 'required' => $required,

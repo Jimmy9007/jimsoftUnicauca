@@ -29,9 +29,9 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get('gestorportal_bd');
                     return new Modelo\DAO\ArchivoDAO($dbAdapter);
                 },
-                Modelo\DAO\LumenDAO::class => function ($container) {
+                Modelo\DAO\LvmenDAO::class => function ($container) {
                     $dbAdapter = $container->get('gestorportal_bd');
-                    return new Modelo\DAO\LumenDAO($dbAdapter);
+                    return new Modelo\DAO\LvmenDAO($dbAdapter);
                 },
             ],
         ];
@@ -50,8 +50,8 @@ class Module implements ConfigProviderInterface
                 Controller\ArchivoController::class => function ($container) {
                     return new Controller\ArchivoController($container->get(Modelo\DAO\ArchivoDAO::class));
                 },
-                Controller\LumenController::class => function ($container) {
-                    return new Controller\LumenController($container->get(Modelo\DAO\LumenDAO::class));
+                Controller\LvmenController::class => function ($container) {
+                    return new Controller\LvmenController($container->get(Modelo\DAO\LvmenDAO::class));
                 },
             ],
         ];

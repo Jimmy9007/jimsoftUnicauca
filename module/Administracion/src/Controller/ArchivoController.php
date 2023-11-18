@@ -17,6 +17,7 @@ class ArchivoController extends AbstractActionController
 
     private $DAO;
     private $rutaLog = './public/log/';
+    /* private $rutaArchivos = '/var/www/html/newportal/archivos/publicos/'; */
     private $rutaArchivos = './../archivos/publicos/';
     //------------------------------------------------------------------------------
 

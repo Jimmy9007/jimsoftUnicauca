@@ -112,4 +112,54 @@ function setFormularioAux(datos) {
     $('#modalFormularioAux').modal('show');
 }
 //------------------------------------------------------------------------------
+function validarAdjunto() {
+    $(document).on('change', 'input[type="file"]', function () {
+        // this.files[0].size recupera el tamaño del archivo
+        // alert(this.files[0].size);
 
+        var fileName = this.files[0].name;
+        var fileSize = this.files[0].size;
+
+        if (fileSize > 2000000) {
+            Swal.fire({
+                title: "El archivo no debe superar las 2MB",
+                text: "GestorPortal",
+                icon: "error",
+                confirmButtonColor: '#f0ad4e',
+                confirmButtonText: 'CERRAR',
+                allowOutsideClick: false
+            });
+            this.value = '';
+            this.files[0].name = '';
+        } else {
+            // recuperamos la extensión del archivo
+            var ext = fileName.split('.').pop();
+
+            // Convertimos en minúscula porque 
+            // la extensión del archivo puede estar en mayúscula
+            ext = ext.toLowerCase();
+
+            // console.log(ext);
+            switch (ext) {
+                case 'pdf':
+                case 'docx':
+                case 'xlsx':
+                case 'pptx':
+                case 'zip':
+                    break;
+                default:
+                    Swal.fire({
+                        title: "El archivo no tiene la extensión adecuada",
+                        text: "Archivos permitidos: pdf, docx, xlsx, pptx y zip",
+                        icon: "error",
+                        confirmButtonColor: '#f0ad4e',
+                        confirmButtonText: 'CERRAR',
+                        allowOutsideClick: false
+                    });
+                    this.value = ''; // reset del valor
+                    this.files[0].name = '';
+            }
+        }
+    });
+}
+//------------------------------------------------------------------------------

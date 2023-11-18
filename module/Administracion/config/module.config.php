@@ -58,16 +58,16 @@ return [
                             ],
                         ],
                     ],
-                    'lumen' => [
+                    'lvmen' => [
                         'type' => \Laminas\Router\Http\Segment::class,
                         'options' => [
-                            'route' => '/lumen/:action[/:id1]',
+                            'route' => '/lvmen/:action[/:id1]',
                             'constraints' => array(
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'id1' => '[a-zA-Z0-9_-]*',
                             ),
                             'defaults' => [
-                                'controller' => Controller\LumenController::class,
+                                'controller' => Controller\LvmenController::class,
                                 'action' => 'index',
                             ],
                         ],

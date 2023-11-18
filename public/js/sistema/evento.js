@@ -196,7 +196,7 @@ function selectColor(tipo) {
         $("#color").val('#db141c');
     } else {
         $("#textColor").val('#FFFFFF');
-        $("#color").val('#3987ad');
+        $("#color").val('#000066');
     }
 }
 //------------------------------------------------------------------------------

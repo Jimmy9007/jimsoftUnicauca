@@ -107,7 +107,7 @@ function setNuevoPassword(respuesta) {
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = '/gestorportal/cerrarsesion';
+                    location.href = '/gestorportalv2/cerrarsesion';
                 }
             });
             break;
